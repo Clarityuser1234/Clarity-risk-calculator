@@ -1,3 +1,3 @@
 ---
-title: Welcome to my blog!
+title: CLARITY Risk Score Calculator and Checklist 
 ---
