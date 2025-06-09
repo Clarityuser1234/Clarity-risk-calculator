@@ -1,7 +1,4 @@
----
-title: CLARITY Risk Score Calculator and Checklist 
----
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
