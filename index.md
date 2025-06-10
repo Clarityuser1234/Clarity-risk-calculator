@@ -1,4 +1,4 @@
-
+<Website html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -82,7 +82,8 @@
         .score-display h3 {
             font-weight: 700;
             margin-bottom: 0.75rem;
-            color: #c2410c; /* Orange 800 */
+            /* Changed to brighter orange */
+            color: #f97316; /* Orange 500 */
         }
         /* Style for the range input (slider) */
         input[type="range"] {
@@ -148,6 +149,41 @@
             padding-top: 0.75rem;
             padding-bottom: 0.75rem;
         }
+        .tooltip-container {
+            position: relative;
+            display: inline-block; /* Essential for tooltip positioning relative to text */
+        }
+        .tooltip-text {
+            visibility: hidden;
+            background-color: #333; /* Dark background */
+            color: #fff; /* White text */
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 8px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%; /* Position above the text */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap; /* Prevent text wrapping */
+            font-size: 0.75rem; /* Smaller font for tooltip */
+        }
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%; /* At the bottom of the tooltip */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="bg-white min-h-screen flex items-center justify-center">
@@ -178,7 +214,7 @@
         <!-- AAS Questionnaire (Female) -->
         <div id="aas-form" class="hidden p-6 bg-orange-50 rounded-lg shadow-sm border border-orange-200">
             <h2 class="sub-section-title text-center text-orange-700">Female: Adult Appendicitis Score (AAS)</h2>
-            <p class="text-sm text-black mb-6 text-center">Please answer the following questions to calculate the AAS score.</p>
+            <p class="text-base text-black mb-6 text-center">Please answer the following questions to calculate the AAS score.</p>
 
             <!-- Age Input - Slider -->
             <div class="input-group">
@@ -333,7 +369,7 @@
         <!-- AIRS Questionnaire (Male) -->
         <div id="airs-form" class="hidden p-6 bg-orange-50 rounded-lg shadow-sm border border-orange-200">
             <h2 class="sub-section-title text-center text-orange-700">Male: Appendicitis Inflammatory Response Score (AIRS)</h2>
-            <p class="text-sm text-black mb-6 text-center">Please answer the following questions to calculate the AIRS score.</p>
+            <p class="text-base text-black mb-6 text-center">Please answer the following questions to calculate the AIRS score.</p>
 
             <!-- Age Input - Slider -->
             <div class="input-group">
@@ -444,72 +480,72 @@
 
         <!-- Results Display -->
         <div id="results-display" class="score-display">
-            <h3 class="text-xl font-bold mb-2">Your Risk Score: <span id="score-value"></span></h3>
+            <h3 class="text-xl font-bold mb-2">Risk Score: <span id="score-value"></span></h3>
             <p id="score-interpretation" class="text-black"></p>
             <button id="reset-all" class="btn btn-secondary mt-4">Start Over</button>
         </div>
 
         <!-- Checklist Section -->
         <div id="clarity-checklist" class="p-6 bg-white rounded-lg shadow-sm border border-gray-800">
-            <h2 class="sub-section-title text-center text-orange-700">Clarity Checklist</h2>
-            <p class="text-black mb-6 text-center">Track completion of key assessment steps.</p>
+            <h2 class="sub-section-title text-center text-orange-600">Clarity Checklist</h2>
+            <p class="text-base text-black mb-6 text-center">Track completion of key assessment steps.</p>
 
-            <div class="grid checklist-grid grid-cols-[1.5fr_1.2fr_1.2fr_1.2fr_auto] gap-x-6 gap-y-3 items-stretch text-sm">
+            <div class="grid checklist-grid grid-cols-[1.5fr_1.2fr_1.2fr_1.2fr_auto] gap-x-6 gap-y-3 items-stretch text-base">
                 <!-- Header Row -->
-                <div class="font-bold text-black text-base border-b border-black pb-2">Step</div>
-                <div class="font-bold text-black text-base border-b border-black pb-2 text-center">Low Risk</div>
-                <div class="font-bold text-black text-base border-b border-black pb-2 text-center">Medium Risk</div>
-                <div class="font-bold text-black text-base border-b border-black pb-2 text-center">High Risk</div>
-                <div class="font-bold text-black text-base border-b border-black pb-2 text-right">Completed</div>
+                <div class="font-bold text-black text-lg border-b border-black pb-2">Step</div>
+                <div class="font-bold text-black text-lg border-b border-black pb-2 text-center">Low Risk</div>
+                <div class="font-bold text-black text-lg border-b border-black pb-2 text-center">Medium Risk</div>
+                <div class="font-bold text-black text-lg border-b border-black pb-2 text-center">High Risk</div>
+                <div class="font-bold text-black text-lg border-b border-black pb-2 text-right">Completed</div>
 
                 <!-- Step 1 - Entire Row -->
                 <div class="py-2 flex flex-col justify-between">
                     <div>
-                        <h3 class="font-semibold text-black mb-1">STEP 1: Risk Stratification</h3>
-                        <p class="text-xs text-black">a) What is the calculated risk score?</p>
+                        <h3 class="text-orange-600 font-bold mb-1">STEP 1: Risk Stratification</h3>
+                        <p class="text-base text-black">a) What is the calculated risk score?</p>
                     </div>
                     <div class="border-b border-black w-full my-4"></div> <!-- Line only in this column, tripled space -->
                     <div>
-                        <p class="text-xs text-black">b) Based on clinical assessment of medium-high risk patients, is appendicitis likely?</p>
+                        <p class="text-base text-black">b) Based on clinical assessment of medium-high risk patients, is appendicitis likely?</p>
                     </div>
                 </div>
 
                 <!-- Column 2: Low Risk (Step 1) -->
                 <div class="py-2 flex flex-col justify-between text-center">
                     <div>
-                        <p class="text-xs text-black">Female: AAS &le; 8</p>
-                        <p class="text-xs text-black">Male: AIRS &le; 2</p>
+                        <p class="text-base text-black">Female: AAS &le; 8</p>
+                        <p class="text-base text-black">Male: AIRS &le; 2</p>
                     </div>
                     <!-- Spacer to push content down for alignment -->
                     <div class="flex-grow"></div>
                     <div>
-                        <p class="text-xs text-black"></p> <!-- Blank for b) -->
+                        <p class="text-base text-black"></p> <!-- Blank for b) -->
                     </div>
                 </div>
 
                 <!-- Column 3: Medium Risk (Step 1) -->
                 <div class="py-2 flex flex-col justify-between text-center">
                     <div>
-                        <p class="text-xs text-black">Female: AAS &ge; 9</p>
-                        <p class="text-xs text-black">Male: AIRS &ge; 3</p>
+                        <p class="text-base text-black">Female: AAS &ge; 9</p>
+                        <p class="text-base text-black">Male: AIRS &ge; 3</p>
                     </div>
                     <!-- Spacer to push content down for alignment -->
                     <div class="flex-grow"></div>
                     <div>
-                        <p class="text-xs text-black">Indeterminate</p>
+                        <p class="text-base text-black">Indeterminate</p>
                     </div>
                 </div>
 
                 <!-- Column 4: High Risk (Step 1) -->
                 <div class="py-2 flex flex-col justify-between text-center">
                     <div>
-                        <p class="text-xs text-black">Female: AAS &ge; 9</p>
-                        <p class="text-xs text-black">Male: AIRS &ge; 3</p>
+                        <p class="text-base text-black">Female: AAS &ge; 9</p>
+                        <p class="text-base text-black">Male: AIRS &ge; 3</p>
                     </div>
                     <!-- Spacer to push content down for alignment -->
                     <div class="flex-grow"></div>
                     <div>
-                        <p class="text-xs text-black">Likely Appendicitis</p>
+                        <p class="text-base text-black">Likely Appendicitis</p>
                     </div>
                 </div>
 
@@ -521,66 +557,71 @@
 
                 <!-- Step 2 -->
                 <div class="border-t border-black pt-3 py-2">
-                    <h3 class="font-semibold text-black mb-1">STEP 2: Care Pathway</h3>
-                    <p class="text-xs text-black">Is the patient on an appropriate care pathway?</p>
+                    <h3 class="text-orange-600 font-bold mb-1">STEP 2: Care Pathway</h3>
+                    <p class="text-base text-black">Is the patient on an appropriate care pathway?</p>
                 </div>
                 <div class="text-center border-t border-black pt-3 py-2 flex items-center justify-center">
-                    <div>
-                        <p class="text-xs text-black">Home</p>
-                        <p class="text-[0.65rem] text-black mt-1">(For symptom onset &lt;24hours: consider ambulatory follow up)</p>
+                    <div class="tooltip-container">
+                        <p class="text-base text-black">Home*</p>
+                        <span class="tooltip-text">For symptom onset &lt;24hours: consider ambulatory follow up</span>
                     </div>
                 </div>
                 <div class="text-center border-t border-black pt-3 py-2 flex items-center justify-center">
-                    <p class="text-xs text-black">Ambulatory Review in 24hrs</p>
+                    <p class="text-base text-black">Ambulatory Review in 24hrs</p>
                 </div>
                 <div class="text-center border-t border-black pt-3 py-2 flex items-center justify-center">
-                    <p class="text-xs text-black">Admit</p>
+                    <p class="text-base text-black">Admit</p>
                 </div>
-                <div class="border-t border-black pt-3 py-2 flex items-center justify-end pr-2"> <!-- Added flex and pr-2 for consistent alignment -->
+                <div class="border-t border-black pt-3 py-2 flex items-center justify-end pr-2">
                     <input type="checkbox" id="step2-completed" class="form-checkbox h-5 w-5 text-orange-600 rounded">
                 </div>
                 
                 <!-- Step 3 -->
                 <div class="border-t border-black pt-3 py-2">
-                    <h3 class="font-semibold text-black mb-1">STEP 3: Selective Imaging</h3>
+                    <h3 class="text-orange-600 font-bold mb-1">STEP 3: Selective Imaging</h3>
                 </div>
                 <div class="text-center border-t border-black pt-3 py-2 flex items-center justify-center">
-                    <p class="text-[0.65rem] text-black italic">(For cases of clinical concern or upon re-attendance: refer to medium risk column)</p>
-                </div>
-                <div class="text-center border-t border-black pt-3 py-2 flex items-center justify-center">
-                    <div>
-                        <p class="text-xs text-black">Consider LDCT if symptoms persist</p>
-                        <p class="text-xs text-black mt-1">Refer if alternate diagnosis suspected</p>
+                    <div class="tooltip-container">
+                        <p class="text-base text-black">-*</p>
+                        <span class="tooltip-text">For cases of clinical concern or upon re-attendance: refer to medium risk column</span>
                     </div>
                 </div>
                 <div class="text-center border-t border-black pt-3 py-2 flex items-center justify-center">
-                    <p class="text-xs text-black">Consider LDCT before surgery</p>
+                    <div>
+                        <p class="text-base text-black">Consider LDCT if symptoms persist</p>
+                        <p class="text-base text-black mt-1">Refer if alternate diagnosis suspected</p>
+                    </div>
                 </div>
-                <div class="border-t border-black pt-3 py-2 flex items-center justify-end pr-2"> <!-- Added flex and pr-2 for consistent alignment -->
+                <div class="text-center border-t border-black pt-3 py-2 flex items-center justify-center">
+                    <p class="text-base text-black">Consider LDCT before surgery</p>
+                </div>
+                <div class="border-t border-black pt-3 py-2 flex items-center justify-end pr-2">
                     <input type="checkbox" id="step3-completed" class="form-checkbox h-5 w-5 text-orange-600 rounded">
                 </div>
 
                 <!-- Step 4 -->
                 <div class="border-t border-black pt-3 py-2">
-                    <h3 class="font-semibold text-black mb-1">STEP 4: Management</h3>
-                    <p class="text-xs text-black">Did Low dose CT show evidence of appendicitis?</p>
+                    <h3 class="text-orange-600 font-bold mb-1">STEP 4: Management</h3>
+                    <p class="text-base text-black">Did Low dose CT show evidence of appendicitis?</p>
                 </div>
                 <div class="text-center border-t border-black pt-3 py-2">
                 </div>
                 <div class="text-center border-t border-black pt-3 py-2 flex items-center justify-center">
                     <div>
-                        <p class="text-xs text-black">Yes - Treat Appendicitis</p>
-                        <p class="text-xs text-black mt-1">No - Home</p>
+                        <p class="text-base text-black">Yes - Treat Appendicitis</p>
+                        <p class="text-base text-black mt-1">No - Home</p>
                     </div>
                 </div>
                 <div class="text-center border-t border-black pt-3 py-2 flex items-center justify-center">
                     <div>
-                        <p class="text-xs text-black">Yes - Treat Appendicitis</p>
-                        <p class="text-xs text-black mt-1">No - Home</p>
-                        <p class="text-[0.65rem] text-black mt-1 italic">(For ongoing clinical concern: consider monitoring or referral)</p>
+                        <p class="text-base text-black">Yes - Treat Appendicitis</p>
+                        <div class="tooltip-container">
+                            <p class="text-base text-black mt-1">No - Home*</p>
+                            <span class="tooltip-text">For ongoing clinical concern: consider monitoring or referral</span>
+                        </div>
                     </div>
                 </div>
-                <div class="border-t border-black pt-3 py-2 flex items-center justify-end pr-2"> <!-- Added flex and pr-2 for consistent alignment -->
+                <div class="border-t border-black pt-3 py-2 flex items-center justify-end pr-2">
                     <input type="checkbox" id="step4-completed" class="form-checkbox h-5 w-5 text-orange-600 rounded">
                 </div>
             </div>
@@ -843,7 +884,7 @@
             if (score <= 8) {
                 interpretation = `Low Risk of appendicitis (AAS Score: ${score}).`;
             } else if (score >= 9) {
-                interpretation = `Medium to High Risk of appendicitis (AAS Score: ${score}). Consider further clinical evaluation.`;
+                interpretation = `Medium to High Risk of appendicitis (AAS Score: ${score}).`;
             }
             scoreInterpretationParagraph.textContent = interpretation;
             resultsDisplay.classList.remove('hidden');
@@ -1068,11 +1109,27 @@
 
             // 1. Patient Gender and Score
             const selectedGenderRadio = document.querySelector('input[name="gender"]:checked');
+            let scoreInterpretation = '';
+            let isMediumHighRisk = false;
+
             if (selectedGenderRadio) {
                 const gender = selectedGenderRadio.value.charAt(0).toUpperCase() + selectedGenderRadio.value.slice(1);
                 summaryText += `Patient Gender: ${gender}\n`;
                 summaryText += `Calculated Score: ${scoreValueSpan.textContent || 'N/A'}\n`;
-                summaryText += `Risk Level: ${scoreInterpretationParagraph.textContent || 'N/A'}\n\n`;
+                scoreInterpretation = scoreInterpretationParagraph.textContent || 'N/A';
+                summaryText += `Risk Level: ${scoreInterpretation}\n`;
+
+                if (gender === 'Female' && parseInt(scoreValueSpan.textContent, 10) >= 9) {
+                    isMediumHighRisk = true;
+                } else if (gender === 'Male' && parseInt(scoreValueSpan.textContent, 10) >= 3) {
+                    isMediumHighRisk = true;
+                }
+
+                if (isMediumHighRisk) {
+                    summaryText += `Patient risk level determined to be: Medium/ High risk (please select)\n`;
+                }
+
+                summaryText += "\n"; // Add extra line for spacing
             } else {
                 summaryText += "Patient Gender: Not selected\n";
                 summaryText += "Calculated Score: N/A\n";
